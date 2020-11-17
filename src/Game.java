@@ -8,11 +8,14 @@ public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private boolean isRunning=false;
 	private Thread thread;
+	private Handler handler;
 
 	public Game() {
 		
 		new Window(1000, 563, "Wizard Game", this);
 		start();
+		handler = new Handler();
+		handler.addObject(new Box(100, 100));
 	}
 	
 	private void start() {
@@ -65,6 +68,8 @@ public class Game extends Canvas implements Runnable {
 	
 	public void tick() {
 		
+		handler.tick();
+		
 	}
 	
 	public void render() {
@@ -78,6 +83,7 @@ public class Game extends Canvas implements Runnable {
 		//////////// Draw of Game ///////////////////
 		g.setColor(Color.red);
 		g.fillRect(0, 0, 1000, 563);
+		handler.render(g);
 		//////////////////////////////
 		g.dispose();
 		bs.show();
